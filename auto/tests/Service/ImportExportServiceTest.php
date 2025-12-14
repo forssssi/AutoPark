@@ -14,11 +14,9 @@ class ImportExportServiceTest extends TestCase
         $em = $this->createMock(EntityManagerInterface::class);
         $tripRepo = $this->createMock(TripRepository::class);
 
-        // simulate no duplicates for first row, duplicate for second
         $duplicateTrip = $this->createMock(\App\Entity\Trip::class);
         $tripRepo->method('findDuplicateTrip')->willReturnOnConsecutiveCalls(null, $duplicateTrip);
 
-        // getReference should return mock entities
         $vehicleMock = $this->createMock(\App\Entity\Vehicle::class);
         $driverMock = $this->createMock(\App\Entity\Driver::class);
         $em->method('getReference')->willReturnCallback(function ($class, $id) use ($vehicleMock, $driverMock) {
