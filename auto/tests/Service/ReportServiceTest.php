@@ -26,7 +26,6 @@ class ReportServiceTest extends TestCase
 
         $tripRepo->expects($this->once())->method('getTotalDistanceForVehicle')->with(1, null, null)->willReturn(123.45);
 
-        // Cache get should invoke callback and return value; provide a mock ItemInterface to the callback
         $cache->method('get')->willReturnCallback(function ($key, $cb) {
             $item = $this->createMock(\Symfony\Contracts\Cache\ItemInterface::class);
             return $cb($item);
@@ -51,12 +50,12 @@ class ReportServiceTest extends TestCase
         $t1 = $this->createMock(Trip::class);
         $t1->method('getId')->willReturn(10);
         $t1->method('getDistance')->willReturn(100.0);
-        $t1->method('getFuelConsumed')->willReturn(10.0); // 0.1 per km
+        $t1->method('getFuelConsumed')->willReturn(10.0);
 
         $t2 = $this->createMock(Trip::class);
         $t2->method('getId')->willReturn(11);
         $t2->method('getDistance')->willReturn(50.0);
-        $t2->method('getFuelConsumed')->willReturn(20.0); // 0.4 per km (anomaly)
+        $t2->method('getFuelConsumed')->willReturn(20.0); 
 
         $tripRepo->method('getAverageFuelConsumptionForVehicle')->willReturn(0.1);
         $tripRepo->method('findTripsByVehicle')->willReturn([$t1, $t2]);
