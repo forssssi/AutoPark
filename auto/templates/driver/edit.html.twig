@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Driver{% endblock %}
+
+{% block body %}
+    <h1>Edit Driver</h1>
+    <form method="post" action="/drivers/{{ driver.id }}/edit">
+        <label>Full name: <input name="fullName" value="{{ driver.fullName }}"></label><br>
+        <label>Contact: <input name="contact" value="{{ driver.contact }}"></label><br>
+        <button type="submit">Save</button>
+    </form>
+    <p><a href="/drivers/{{ driver.id }}">Cancel</a></p>
+{% endblock %}

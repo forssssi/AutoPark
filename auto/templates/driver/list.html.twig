@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Drivers{% endblock %}
+
+{% block body %}
+    <h1>Drivers</h1>
+    <p><a href="/drivers/new">Create new driver</a></p>
+    <table>
+        <thead><tr><th>ID</th><th>Name</th><th>Contact</th><th>Actions</th></tr></thead>
+        <tbody>
+            {% for d in drivers|default([]) %}
+                <tr>
+                    <td>{{ d.id }}</td>
+                    <td>{{ d.fullName }}</td>
+                    <td>{{ d.contact }}</td>
+                    <td><a href="/drivers/{{ d.id }}">Show</a> | <a href="/drivers/{{ d.id }}/edit">Edit</a></td>
+                </tr>
+            {% else %}
+                <tr><td colspan="4">No drivers</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vehicle {{ vehicle.id }}{% endblock %}
+
+{% block body %}
+    <h1>Vehicle {{ vehicle.id }}</h1>
+    <dl>
+        <dt>Registration</dt>
+        <dd>{{ vehicle.registration }}</dd>
+        <dt>Model</dt>
+        <dd>{{ vehicle.model }}</dd>
+    </dl>
+    <p>
+        <a href="/vehicles/{{ vehicle.id }}/edit">Edit</a> |
+        <a href="/vehicles">Back to list</a>
+    </p>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Assignments{% endblock %}
+
+{% block body %}
+    <h1>Assignments</h1>
+    <p><a href="/assignments/new">Create new assignment</a></p>
+    <table>
+        <thead><tr><th>ID</th><th>Trip</th><th>Driver</th><th>Actions</th></tr></thead>
+        <tbody>
+            {% for a in assignments|default([]) %}
+                <tr>
+                    <td>{{ a.id }}</td>
+                    <td>{{ a.trip?.id }}</td>
+                    <td>{{ a.driver?.fullName }}</td>
+                    <td><a href="/assignments/{{ a.id }}">Show</a> | <a href="/assignments/{{ a.id }}/edit">Edit</a></td>
+                </tr>
+            {% else %}
+                <tr><td colspan="4">No assignments</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

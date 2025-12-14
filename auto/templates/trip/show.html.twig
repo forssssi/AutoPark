@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Trip {{ trip.id }}{% endblock %}
+
+{% block body %}
+    <h1>Trip {{ trip.id }}</h1>
+    <dl>
+        <dt>Vehicle</dt><dd>{{ trip.vehicle?.model }}</dd>
+        <dt>Driver</dt><dd>{{ trip.driver?.fullName }}</dd>
+        <dt>Date</dt><dd>{{ trip.date }}</dd>
+        <dt>Distance</dt><dd>{{ trip.distance }}</dd>
+    </dl>
+    <p><a href="/trips">Back to list</a></p>
+{% endblock %}

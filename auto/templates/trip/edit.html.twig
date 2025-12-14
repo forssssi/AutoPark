@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Trip{% endblock %}
+
+{% block body %}
+    <h1>Edit Trip</h1>
+    <form method="post" action="/trips/{{ trip.id }}/edit">
+        <label>Date: <input name="date" value="{{ trip.date }}"></label><br>
+        <label>Distance: <input name="distance" value="{{ trip.distance }}" type="number" step="0.1"></label><br>
+        <label>Fuel: <input name="fuelConsumed" value="{{ trip.fuelConsumed }}" type="number" step="0.01"></label><br>
+        <button type="submit">Save</button>
+    </form>
+    <p><a href="/trips/{{ trip.id }}">Cancel</a></p>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Assignment {{ assignment.id }}{% endblock %}
+
+{% block body %}
+    <h1>Assignment {{ assignment.id }}</h1>
+    <dl>
+        <dt>Trip</dt><dd>{{ assignment.trip?.id }}</dd>
+        <dt>Driver</dt><dd>{{ assignment.driver?.fullName }}</dd>
+    </dl>
+    <p><a href="/assignments">Back to list</a></p>
+{% endblock %}

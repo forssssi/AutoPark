@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Refuels{% endblock %}
+
+{% block body %}
+    <h1>Refuels</h1>
+    <p><a href="/refuels/new">Record refuel</a></p>
+    <table>
+        <thead><tr><th>ID</th><th>Vehicle</th><th>Date</th><th>Liters</th><th>Actions</th></tr></thead>
+        <tbody>
+            {% for r in refuels|default([]) %}
+                <tr>
+                    <td>{{ r.id }}</td>
+                    <td>{{ r.vehicle?.model }}</td>
+                    <td>{{ r.date }}</td>
+                    <td>{{ r.liters }}</td>
+                    <td><a href="/refuels/{{ r.id }}">Show</a> | <a href="/refuels/{{ r.id }}/edit">Edit</a></td>
+                </tr>
+            {% else %}
+                <tr><td colspan="5">No refuels</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

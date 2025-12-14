@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Maintenance{% endblock %}
+
+{% block body %}
+    <h1>Maintenance Records</h1>
+    <p><a href="/maintenances/new">Create maintenance</a></p>
+    <table>
+        <thead><tr><th>ID</th><th>Vehicle</th><th>Date</th><th>Cost</th><th>Actions</th></tr></thead>
+        <tbody>
+            {% for m in maintenances|default([]) %}
+                <tr>
+                    <td>{{ m.id }}</td>
+                    <td>{{ m.vehicle?.model }}</td>
+                    <td>{{ m.date }}</td>
+                    <td>{{ m.cost }}</td>
+                    <td><a href="/maintenances/{{ m.id }}">Show</a> | <a href="/maintenances/{{ m.id }}/edit">Edit</a></td>
+                </tr>
+            {% else %}
+                <tr><td colspan="5">No records</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

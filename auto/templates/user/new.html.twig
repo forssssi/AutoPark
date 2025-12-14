@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New User{% endblock %}
+
+{% block body %}
+    <h1>Create User</h1>
+    <form id="user-form">
+        <label>Username: <input name="username"></label><br>
+        <label>Password: <input name="password" type="password"></label><br>
+        <label>Roles (comma): <input name="roles"></label><br>
+        <button type="submit">Create</button>
+    </form>
+    <script>
+        document.getElementById('user-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = Object.fromEntries(new FormData(e.target).entries());
+            if (data.roles) data.roles = data.roles.split(',').map(s=>s.trim());
+            const res = await fetch('/api/users', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)});
+            if (res.ok) location.href = '/users';
+        });
+    </script>
+{% endblock %}

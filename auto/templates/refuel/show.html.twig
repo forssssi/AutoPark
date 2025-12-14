@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Refuel {{ refuel.id }}{% endblock %}
+
+{% block body %}
+    <h1>Refuel {{ refuel.id }}</h1>
+    <dl>
+        <dt>Vehicle</dt><dd>{{ refuel.vehicle?.model }}</dd>
+        <dt>Date</dt><dd>{{ refuel.date }}</dd>
+        <dt>Liters</dt><dd>{{ refuel.liters }}</dd>
+    </dl>
+    <p><a href="/refuels">Back to list</a></p>
+{% endblock %}

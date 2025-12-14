@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Trips{% endblock %}
+
+{% block body %}
+    <h1>Trips</h1>
+    <p><a href="/trips/new">Create new trip</a></p>
+    <table>
+        <thead>
+            <tr><th>ID</th><th>Vehicle</th><th>Driver</th><th>Date</th><th>Distance</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+            {% for t in trips|default([]) %}
+                <tr>
+                    <td>{{ t.id }}</td>
+                    <td>{{ t.vehicle?.model }}</td>
+                    <td>{{ t.driver?.fullName }}</td>
+                    <td>{{ t.date }}</td>
+                    <td>{{ t.distance }}</td>
+                    <td>
+                        <a href="/trips/{{ t.id }}">Show</a> |
+                        <a href="/trips/{{ t.id }}/edit">Edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr><td colspan="6">No trips</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

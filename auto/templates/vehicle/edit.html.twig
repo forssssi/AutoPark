@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Vehicle{% endblock %}
+
+{% block body %}
+    <h1>Edit Vehicle</h1>
+    {# Simple HTML form — adjust fields to match your form implementation #}
+    <form method="post" action="/vehicles/{{ vehicle.id }}/edit">
+        <label>Registration: <input name="registration" value="{{ vehicle.registration }}"></label><br>
+        <label>Model: <input name="model" value="{{ vehicle.model }}"></label><br>
+        <button type="submit">Save</button>
+    </form>
+    <p><a href="/vehicles/{{ vehicle.id }}">Cancel</a></p>
+{% endblock %}

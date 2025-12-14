@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Driver {{ driver.id }}{% endblock %}
+
+{% block body %}
+    <h1>Driver {{ driver.id }}</h1>
+    <dl>
+        <dt>Full name</dt><dd>{{ driver.fullName }}</dd>
+        <dt>Contact</dt><dd>{{ driver.contact }}</dd>
+    </dl>
+    <p><a href="/drivers">Back to list</a></p>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Maintenance{% endblock %}
+
+{% block body %}
+    <h1>Create Maintenance</h1>
+    <form id="maintenance-form">
+        <label>Vehicle ID: <input name="vehicle"></label><br>
+        <label>Date: <input name="date" type="date"></label><br>
+        <label>Cost: <input name="cost" type="number" step="0.01"></label><br>
+        <button type="submit">Create</button>
+    </form>
+    <script>
+        document.getElementById('maintenance-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = Object.fromEntries(new FormData(e.target).entries());
+            const res = await fetch('/api/maintenances', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)});
+            if (res.ok) location.href = '/maintenances';
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Driver{% endblock %}
+
+{% block body %}
+    <h1>Create Driver</h1>
+    <form id="driver-form">
+        <label>Full name: <input name="fullName"></label><br>
+        <label>Contact: <input name="contact"></label><br>
+        <button type="submit">Create</button>
+    </form>
+    <script>
+        document.getElementById('driver-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = Object.fromEntries(new FormData(e.target).entries());
+            const res = await fetch('/api/drivers', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)});
+            if (res.ok) location.href = '/drivers';
+        });
+    </script>
+{% endblock %}

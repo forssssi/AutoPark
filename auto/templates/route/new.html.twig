@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Route{% endblock %}
+
+{% block body %}
+    <h1>Create Route</h1>
+    <form id="route-form">
+        <label>Name: <input name="name"></label><br>
+        <label>Distance: <input name="distance" type="number" step="0.1"></label><br>
+        <button type="submit">Create</button>
+    </form>
+    <script>
+        document.getElementById('route-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = Object.fromEntries(new FormData(e.target).entries());
+            const res = await fetch('/api/routes', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)});
+            if (res.ok) location.href = '/routes';
+        });
+    </script>
+{% endblock %}

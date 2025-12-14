@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Route {{ route.id }}{% endblock %}
+
+{% block body %}
+    <h1>Route {{ route.id }}</h1>
+    <dl>
+        <dt>Name</dt><dd>{{ route.name }}</dd>
+        <dt>Distance</dt><dd>{{ route.distance }}</dd>
+    </dl>
+    <p><a href="/routes">Back to list</a></p>
+{% endblock %}

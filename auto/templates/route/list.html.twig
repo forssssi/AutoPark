@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Routes{% endblock %}
+
+{% block body %}
+    <h1>Routes</h1>
+    <p><a href="/routes/new">Create new route</a></p>
+    <table>
+        <thead><tr><th>ID</th><th>Name</th><th>Distance</th><th>Actions</th></tr></thead>
+        <tbody>
+            {% for r in routes|default([]) %}
+                <tr>
+                    <td>{{ r.id }}</td>
+                    <td>{{ r.name }}</td>
+                    <td>{{ r.distance }}</td>
+                    <td><a href="/routes/{{ r.id }}">Show</a> | <a href="/routes/{{ r.id }}/edit">Edit</a></td>
+                </tr>
+            {% else %}
+                <tr><td colspan="4">No routes</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

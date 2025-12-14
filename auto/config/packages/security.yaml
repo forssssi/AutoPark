@@ -19,6 +19,7 @@ security:
         api:
             pattern: ^/api
             stateless: true
+            provider: app_user_provider
             custom_authenticators: [App\Security\ApiTokenAuthenticator]
         main:
             lazy: true

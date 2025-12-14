@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block body %}
+    <h1>Edit User</h1>
+    <form method="post" action="/users/{{ user.id }}/edit">
+        <label>Username: <input name="username" value="{{ user.username }}"></label><br>
+        <label>Roles (comma): <input name="roles" value="{{ user.roles|join(', ') }}"></label><br>
+        <button type="submit">Save</button>
+    </form>
+    <p><a href="/users/{{ user.id }}">Cancel</a></p>
+{% endblock %}

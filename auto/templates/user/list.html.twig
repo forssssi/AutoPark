@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users{% endblock %}
+
+{% block body %}
+    <h1>Users</h1>
+    <p><a href="/users/new">Create user</a></p>
+    <table>
+        <thead><tr><th>ID</th><th>Username</th><th>Roles</th><th>Actions</th></tr></thead>
+        <tbody>
+            {% for u in users|default([]) %}
+                <tr>
+                    <td>{{ u.id }}</td>
+                    <td>{{ u.username }}</td>
+                    <td>{{ u.roles|join(', ') }}</td>
+                    <td><a href="/users/{{ u.id }}">Show</a> | <a href="/users/{{ u.id }}/edit">Edit</a></td>
+                </tr>
+            {% else %}
+                <tr><td colspan="4">No users</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

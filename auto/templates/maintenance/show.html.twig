@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Maintenance {{ maintenance.id }}{% endblock %}
+
+{% block body %}
+    <h1>Maintenance {{ maintenance.id }}</h1>
+    <dl>
+        <dt>Vehicle</dt><dd>{{ maintenance.vehicle?.model }}</dd>
+        <dt>Date</dt><dd>{{ maintenance.date }}</dd>
+        <dt>Cost</dt><dd>{{ maintenance.cost }}</dd>
+    </dl>
+    <p><a href="/maintenances">Back to list</a></p>
+{% endblock %}

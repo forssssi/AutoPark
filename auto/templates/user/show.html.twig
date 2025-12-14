@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User {{ user.id }}{% endblock %}
+
+{% block body %}
+    <h1>User {{ user.id }}</h1>
+    <dl>
+        <dt>Username</dt><dd>{{ user.username }}</dd>
+        <dt>Roles</dt><dd>{{ user.roles|join(', ') }}</dd>
+    </dl>
+    <p><a href="/users">Back to list</a></p>
+{% endblock %}

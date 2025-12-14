@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vehicles{% endblock %}
+
+{% block body %}
+    <h1>Vehicles</h1>
+    <p><a href="/vehicles/new">Create new vehicle</a></p>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Plate / VIN</th>
+                <th>Model</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {# rows should be rendered by controller with a `vehicles` variable #}
+            {% for v in vehicles|default([]) %}
+                <tr>
+                    <td>{{ v.id }}</td>
+                    <td>{{ v.plateNumber ?: v.vin }}</td>
+                    <td>{{ v.model }}</td>
+                    <td>
+                        <a href="/vehicles/{{ v.id }}">Show</a> |
+                        <a href="/vehicles/{{ v.id }}/edit">Edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr><td colspan="4">No vehicles</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
