@@ -1,0 +1,11 @@
+vendor
+var/cache
+var/log
+node_modules
+.git
+.github
+docker
+tests
+docs
+*.md
+*.dist

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Trip{% endblock %}
+
+{% block body %}
+<h1>Create Trip</h1>
+<form id="trip-form">
+    <label>API Token: <input name="apiToken" id="apiToken" placeholder="Bearer token (dispatcher)"/></label><br>
+    <label>Vehicle: <select name="vehicle" id="vehicle-select"></select></label><br>
+    <label>Driver: <select name="driver" id="driver-select"></select></label><br>
+    <label>Date: <input name="date" type="datetime-local"></label><br>
+    <label>Distance (km): <input name="distance" type="number" step="0.1"></label><br>
+    <label>Fuel consumed (L): <input name="fuelConsumed" type="number" step="0.01"></label><br>
+    <button type="submit">Create</button>
+    <div id="result"></div>
+</form>
+
+<script>
+async function populate() {
+    const vRes = await fetch('/api/vehicles');
+    const vehicles = await vRes.json();
+    const vs = document.getElementById('vehicle-select');
+    vehicles.forEach(v => { const o = document.createElement('option'); o.value = v.id; o.textContent = `${v.model} (${v.plateNumber||v.vin})`; vs.appendChild(o); });
+
+    const dRes = await fetch('/api/drivers');
+    const drivers = await dRes.json();
+    const ds = document.getElementById('driver-select');
+    drivers.forEach(d => { const o = document.createElement('option'); o.value = d.id; o.textContent = d.fullName ?? d.contact; ds.appendChild(o); });
+}
+
+document.getElementById('trip-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target).entries());
+    const headers = {'Content-Type':'application/json'};
+    const token = document.getElementById('apiToken').value.trim();
+    if (token) headers['Authorization'] = 'Bearer ' + token;
+    const res = await fetch('/api/trips', { method: 'POST', headers, body: JSON.stringify(data) });
+    const json = await res.json().catch(()=>({}));
+    document.getElementById('result').textContent = res.status === 201 ? 'Created id: '+(json.id||'') : JSON.stringify(json);
+});
+
+populate();
+</script>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Vehicle{% endblock %}
+
+{% block body %}
+<h1>Create Vehicle</h1>
+<form id="vehicle-form">
+    <label>VIN: <input name="vin" required></label><br>
+    <label>Plate number: <input name="plateNumber"></label><br>
+    <label>Model: <input name="model"></label><br>
+    <label>Status: <select name="status"><option value="active">active</option><option value="inactive">inactive</option><option value="maintenance">maintenance</option></select></label><br>
+    <label>Mileage: <input name="mileage" type="number" value="0"></label><br>
+    <label>API Token: <input name="apiToken" id="apiToken" placeholder="Bearer token (dispatcher)"/></label><br>
+    <button type="submit">Create</button>
+    <div id="result"></div>
+</form>
+
+<script>
+document.getElementById('vehicle-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const data = Object.fromEntries(new FormData(form).entries());
+    const headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
+    const token = document.getElementById('apiToken').value.trim();
+    if (token) headers['Authorization'] = 'Bearer ' + token;
+    const res = await fetch('/api/vehicles', {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(data)
+    });
+    const json = await res.json().catch(() => ({}));
+    document.getElementById('result').textContent = res.status === 201 ? 'Created id: ' + (json.id ?? '') : JSON.stringify(json);
+});
+</script>
+
+{% endblock %}
